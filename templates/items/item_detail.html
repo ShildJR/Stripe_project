@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+{{ item.name }}
+{% endblock %}
+{% block scripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>Price: ${{ item.get_display_price }}</p>
+    <button id="buy-button">Купить</button>
+
+    <script>
+        var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+        document.getElementById('buy-button').addEventListener('click', function() {
+            fetch('/buy/{{ item.id }}/')
+            .then(response => response.json())
+            .then(data => stripe.redirectToCheckout({ sessionId: data.sessionId }))
+        });
+    </script>
+{% endblock %}
