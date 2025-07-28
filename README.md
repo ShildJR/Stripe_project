@@ -9,7 +9,7 @@
 ### Установка
 
 ```
-git clone 
+git clone https://github.com/ShildJR/Stripe_project
 cd Stripe_project
 ```
 # Создайте и активируйте виртуальное окружение
