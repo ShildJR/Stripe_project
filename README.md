@@ -32,6 +32,7 @@ SITE_URL=http://localhost:8000
 ```
 # Примените миграции:
 ```
+python manage.py makemigrations
 python manage.py migrate
 ```
 # Создайте суперпользователя:
