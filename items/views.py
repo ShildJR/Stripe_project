@@ -3,12 +3,20 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, ListView
+from .models import Item
 
 from config import settings
 from items.models import Item
 from items.services.stripe_service import create_stripe_session
 
+class IndexView(ListView):
+    model = Item
+    template_name = 'items/index.html'
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return Item.objects.all().order_by('id')
 
 class ItemDetailView(DetailView):
     model = Item
